@@ -6,4 +6,6 @@
     <string name="Pokedex">Pokedex</string>
     <string name="Boussole">Boussole</string>
     <string name="Podomètre">Podomètre</string>
+    <string name="Podometer">Podometer</string>
+    <string name="Compass">Compass</string>
 </resources>

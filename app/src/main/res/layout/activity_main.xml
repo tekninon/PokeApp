@@ -92,8 +92,9 @@
 
         <ImageView
             android:id="@+id/imagePokemon"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_marginTop="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center" />
 
         <LinearLayout
@@ -106,7 +107,7 @@
                 android:id="@+id/btnCompass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Boussole"
+                android:text="@string/Compass"
                 android:layout_weight="1"
                 android:layout_marginLeft="25dip"
                 android:layout_marginRight="25dip"
@@ -115,7 +116,7 @@
                 android:id="@+id/btnPodo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Podomètre"
+                android:text="@string/Podometer"
                 android:layout_weight="1"
                 android:layout_marginLeft="25dip"
                 android:layout_marginRight="25dip"
