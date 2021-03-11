@@ -28,6 +28,7 @@ import androidx.navigation.ui.NavigationUI;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Request by Name
-                request = rfConfig.getPokeService().getPokemonByName(etSearch.getText().toString().toLowerCase());
-
+               // request = rfConfig.getPokeService().getPokemonByName(etSearch.getText().toString().toLowerCase());
+                Random random = new Random();
+                int nb = random.nextInt(152);
+                request = rfConfig.getPokeService().getPokemonById(nb == 0 ? nb : nb+1);
                 request.enqueue(new Callback<Pokemon>() {
                     @Override
                     public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
