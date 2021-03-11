@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 
 @JsonIgnoreProperties({"base_experience","is_default","order","weight","abilities","forms",
         "game_indices", "held_items", "location_area_encounters", "moves", "species", "sprites",
-        "stats", "types"})
+        "stats", "types","past_types"})
 public class Pokemon {
 
     private int id;
