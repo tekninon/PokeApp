@@ -17,14 +17,12 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class PodoActivity extends AppCompatActivity {
 
-    SensorManager sensorManager;
-    Boolean running = false;
-    Float totalSteps = 0f;
-    Float previousTotalSteps = 0f;
+
 
     private TextView textView;
     private double MagnitudePrevious = 0;
     private Integer stepCount = 0;
+    private Float maxStep = 500f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +48,9 @@ public class PodoActivity extends AppCompatActivity {
                    MagnitudePrevious = Magnitude;
 
                    if(MagnitudeDelta > 6) {
-                       stepCount++;
+                       if(stepCount < maxStep) {
+                           stepCount++;
+                       }
                    }
                    textView.setText(stepCount.toString());
 
