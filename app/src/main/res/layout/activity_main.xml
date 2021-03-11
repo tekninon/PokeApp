@@ -102,7 +102,11 @@
             android:layout_height="wrap_content"
             android:padding="4dp" />
 
-
+        <ImageView
+            android:id="@+id/imagePokemon"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

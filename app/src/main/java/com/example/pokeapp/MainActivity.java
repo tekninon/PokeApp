@@ -1,25 +1,33 @@
 package com.example.pokeapp;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pokeapp.api.PokemonApi;
 import com.example.pokeapp.api.PokemonApiInterface;
 import com.example.pokeapp.models.Pokemon;
+import com.example.pokeapp.utils.StringUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     Button buttonSearch;
     EditText etSearch;
     TextView tvPokemonName, tvPokemonId, tvPokemonHeight;
+    ImageView pokemonImg;
     PokemonApi rfConfig;
     InputMethodManager inputManager;
 
@@ -51,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         tvPokemonName = findViewById(R.id.tv_pokename);
         tvPokemonId = findViewById(R.id.tv_pokeid);
         tvPokemonHeight = findViewById(R.id.tv_pokeheight);
+        pokemonImg = findViewById(R.id.imagePokemon);
 
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,9 +72,14 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
                         Pokemon pokemon = response.body();
+                        String urlImg = StringUtils.getPokemonImageStringFromId(Integer.toString(pokemon.getId()));
                         tvPokemonName.setText(pokemon.getName());
                         tvPokemonId.setText(Integer.toString(pokemon.getId()));
                         tvPokemonHeight.setText(Float.toString(pokemon.getHeight()));
+
+                        // Recuperer url de l'api
+                        Picasso.get().load(urlImg).into(pokemonImg);
+
                         etSearch.clearFocus();
                     }
 
