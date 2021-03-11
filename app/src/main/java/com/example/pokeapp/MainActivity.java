@@ -1,35 +1,27 @@
 package com.example.pokeapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pokeapp.api.PokemonApi;
-import com.example.pokeapp.api.PokemonApiInterface;
 import com.example.pokeapp.models.Pokemon;
+import com.example.pokeapp.shaker.ShakeDetector;
 import com.example.pokeapp.utils.StringUtils;
-import com.github.tbouron.shakedetector.library.ShakeDetector;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Random;
 
 import retrofit2.Call;
@@ -38,6 +30,10 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    //sensor
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeDetector mShakeDetector;
 
     TextView tvPokemonName, tvPokemonId, tvPokemonHeight;
     ImageView pokemonImg;
@@ -52,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
         rfConfig = new PokemonApi();
         inputManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
 
@@ -61,9 +56,20 @@ public class MainActivity extends AppCompatActivity {
         tvPokemonHeight = findViewById(R.id.tv_pokeheight);
         pokemonImg = findViewById(R.id.imagePokemon);
 
-        ShakeDetector.create(this, new ShakeDetector.OnShakeListener() {
+        // ShakeDetector initialization
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector();
+        mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+
             @Override
-            public void OnShake() {
+            public void onShake(int count) {
+                /*
+                 * The following method, "handleShakeEvent(count):" is a stub //
+                 * method you would use to setup whatever you want done once the
+                 * device has been shook.
+                 */
                 Toast.makeText(getApplicationContext(), "Device shaken!", Toast.LENGTH_SHORT).show();
                 Random random = new Random();
                 int nb = random.nextInt(152);
@@ -80,19 +86,17 @@ public class MainActivity extends AppCompatActivity {
                         // Recuperer url de l'api
                         Picasso.get().load(urlImg).into(pokemonImg);
 
-                        //etSearch.clearFocus();
                     }
 
                     @Override
                     public void onFailure(Call<Pokemon> call, Throwable t) {
                         Log.e("REQUEST ERROR", "Fail to find Pokemon. " + t.getMessage());
                         Toast.makeText(MainActivity.this, "Fail to find Pokemon.", Toast.LENGTH_LONG).show();
-                        //etSearch.setText("");
                     }
                 });
-                //inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         });
+
 
 
     }
@@ -100,29 +104,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        ShakeDetector.start();
+        // Add the following line to register the Session Manager Listener onResume
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer,	SensorManager.SENSOR_DELAY_UI);
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        ShakeDetector.stop();
+    protected void onPause() {
+        // Add the following line to unregister the Sensor Manager onPause
+        mSensorManager.unregisterListener(mShakeDetector);
+        super.onPause();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ShakeDetector.destroy();
-    }
-
-    public void openCompass(View view) {
-        Intent intent = new Intent(MainActivity.this, BoussoleActivity.class);
-        startActivity(intent);
-    }
-
-    public void openPodo(View view) {
-        Intent intent = new Intent(MainActivity.this, PodoActivity.class);
-        startActivity(intent);
-    }
 
 }
