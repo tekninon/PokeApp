@@ -40,6 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
+            android:textColor="@android:color/black"
             android:text="Name"
             android:textStyle="bold" />
 
@@ -47,6 +48,7 @@
             android:id="@+id/tv_pokename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
             android:padding="4dp" />
 
         <TextView
@@ -54,6 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="4dp"
+            android:textColor="@android:color/black"
             android:text="Id"
             android:textStyle="bold" />
 
@@ -61,6 +64,7 @@
             android:id="@+id/tv_pokeid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
             android:padding="4dp" />
 
         <TextView
@@ -69,12 +73,14 @@
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:text="Height"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_pokeheight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
             android:padding="4dp" />
 
         <ImageView
