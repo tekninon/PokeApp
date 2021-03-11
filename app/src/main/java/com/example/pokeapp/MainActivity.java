@@ -41,15 +41,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_pokedex, R.id.navigation_boussole, R.id.navigation_podometre)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navView, navController);
+
 
         rfConfig = new PokemonApi();
         inputManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -64,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Request by Name
-                request = rfConfig.getPokeService().getPokemon(etSearch.getText().toString());
+                request = rfConfig.getPokeService().getPokemonByName(etSearch.getText().toString());
 
                 request.enqueue(new Callback<Pokemon>() {
                     @Override
@@ -77,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Pokemon> call, Throwable t) {
-                        Log.e("REQUEST ERROR", "Fail to find Pokemon. " + t.getMessage());
+                        //Log.e("REQUEST ERROR", "Fail to find Pokemon. " + t.getMessage());
                         Toast.makeText(MainActivity.this, "Fail to find Pokemon.", Toast.LENGTH_LONG).show();
                         etSearch.setText("");
                     }
