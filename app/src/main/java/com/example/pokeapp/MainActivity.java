@@ -96,9 +96,6 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-
-
-
     }
 
     @Override
@@ -113,6 +110,16 @@ public class MainActivity extends AppCompatActivity {
         // Add the following line to unregister the Sensor Manager onPause
         mSensorManager.unregisterListener(mShakeDetector);
         super.onPause();
+    }
+
+    public void openCompass(View view) {
+        Intent intent = new Intent(MainActivity.this, BoussoleActivity.class);
+        startActivity(intent);
+    }
+
+    public void openPodo(View view) {
+        Intent intent = new Intent(MainActivity.this, PodoActivity.class);
+        startActivity(intent);
     }
 
 

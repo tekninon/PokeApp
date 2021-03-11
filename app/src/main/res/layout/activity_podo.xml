@@ -15,7 +15,7 @@
         app:cpb_background_progressbar_color="#F2F2F2"
         app:cpb_progressbar_color="#FF0000"
         app:cpb_progressbar_width="10dp"
-        app:cpb_progress_max="2500"
+        app:cpb_progress_max="500"
         app:cpb_round_border="true"
         />
 
@@ -24,9 +24,19 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:id="@+id/step_counter"
-        android:text=""
+        android:text="0"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
+        android:textSize="40sp"
         />
+
+    <TextView
+        android:id="@+id/max_step"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/step_counter"
+        android:layout_centerInParent="true"
+        android:text="/500"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
 </RelativeLayout>

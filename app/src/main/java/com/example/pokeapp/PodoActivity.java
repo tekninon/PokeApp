@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.se.omapi.Session;
 import android.widget.TextView;
 
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+
 public class PodoActivity extends AppCompatActivity {
 
     SensorManager sensorManager;
@@ -32,6 +34,8 @@ public class PodoActivity extends AppCompatActivity {
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
+        CircularProgressBar circularProgressBar = findViewById(R.id.progress_circular);
+
         SensorEventListener stepDetector = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
@@ -47,7 +51,7 @@ public class PodoActivity extends AppCompatActivity {
                    if(MagnitudeDelta > 6) {
                        stepCount++;
                    }
-                    textView.setText(stepCount.toString());
+                   textView.setText(stepCount.toString());
                }
             }
 
