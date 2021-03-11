@@ -9,4 +9,6 @@
     <string name="Podometer">Podometer</string>
     <string name="Compass">Compass</string>
     <string name="Pedometer">Pedometer</string>
+    <string name="reset">Reset</string>
+    <string name="todo">TODO</string>
 </resources>
