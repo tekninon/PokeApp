@@ -3,6 +3,7 @@ package com.example.pokeapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -34,7 +35,7 @@ public class PodoActivity extends AppCompatActivity {
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        CircularProgressBar circularProgressBar = findViewById(R.id.progress_circular);
+        final CircularProgressBar circularProgressBar = findViewById(R.id.progress_circular);
 
         SensorEventListener stepDetector = new SensorEventListener() {
             @Override
@@ -52,6 +53,8 @@ public class PodoActivity extends AppCompatActivity {
                        stepCount++;
                    }
                    textView.setText(stepCount.toString());
+
+                   circularProgressBar.setProgressWithAnimation(stepCount, Long.valueOf(100));
                }
             }
 
@@ -89,5 +92,10 @@ public class PodoActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         stepCount = sharedPreferences.getInt("stepCount", 0);
+    }
+
+    public void retourArriere() {
+        Intent intent = new Intent(PodoActivity.this, MainActivity.class);
+        startActivity(intent);
     }
 }
