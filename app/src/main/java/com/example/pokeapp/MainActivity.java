@@ -16,6 +16,7 @@ import com.example.pokeapp.api.PokemonApi;
 import com.example.pokeapp.api.PokemonApiInterface;
 import com.example.pokeapp.models.Pokemon;
 import com.example.pokeapp.utils.StringUtils;
+import com.github.tbouron.shakedetector.library.ShakeDetector;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
@@ -36,8 +37,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button buttonSearch;
-    EditText etSearch;
+
     TextView tvPokemonName, tvPokemonId, tvPokemonHeight;
     ImageView pokemonImg;
     PokemonApi rfConfig;
@@ -53,21 +53,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         rfConfig = new PokemonApi();
         inputManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
 
-        //etSearch = findViewById(R.id.editText_search);
-        buttonSearch = findViewById(R.id.button_search);
         tvPokemonName = findViewById(R.id.tv_pokename);
         tvPokemonId = findViewById(R.id.tv_pokeid);
         tvPokemonHeight = findViewById(R.id.tv_pokeheight);
         pokemonImg = findViewById(R.id.imagePokemon);
 
-        buttonSearch.setOnClickListener(new View.OnClickListener() {
+        ShakeDetector.create(this, new ShakeDetector.OnShakeListener() {
             @Override
-            public void onClick(View v) {
-                //Request by Name
-               // request = rfConfig.getPokeService().getPokemonByName(etSearch.getText().toString().toLowerCase());
+            public void OnShake() {
+                Toast.makeText(getApplicationContext(), "Device shaken!", Toast.LENGTH_SHORT).show();
                 Random random = new Random();
                 int nb = random.nextInt(152);
                 request = rfConfig.getPokeService().getPokemonById(nb == 0 ? nb : nb+1);
@@ -93,9 +91,29 @@ public class MainActivity extends AppCompatActivity {
                         //etSearch.setText("");
                     }
                 });
-                inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                //inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         });
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ShakeDetector.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        ShakeDetector.stop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ShakeDetector.destroy();
     }
 
 }
