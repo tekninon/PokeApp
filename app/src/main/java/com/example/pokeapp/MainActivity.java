@@ -79,9 +79,17 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
                         Pokemon pokemon = response.body();
                         String urlImg = StringUtils.getPokemonImageStringFromId(Integer.toString(pokemon.getId()));
-                        tvPokemonName.setText(pokemon.getName());
+
+                        String name = pokemon.getName();
+                        String nomMaj = name.replaceFirst(".",(name.charAt(0)+"").toUpperCase());
+                        System.out.println(nomMaj);
+                        tvPokemonName.setText(nomMaj);
+
                         tvPokemonId.setText(Integer.toString(pokemon.getId()));
-                        tvPokemonHeight.setText(Float.toString(pokemon.getHeight()));
+
+                        String taille = Float.toString(pokemon.getHeight() + 100);
+                        String tailleEnCm = taille + " cm";
+                        tvPokemonHeight.setText(tailleEnCm);
 
                         // Recuperer url de l'api
                         Picasso.get().load(urlImg).into(pokemonImg);
@@ -121,6 +129,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, PodoActivity.class);
         startActivity(intent);
     }
-
-
 }
