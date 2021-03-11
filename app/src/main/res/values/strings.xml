@@ -9,4 +9,6 @@
     <string name="Podometer">Podometer</string>
     <string name="Compass">Compass</string>
     <string name="Pedometer">Pedometer</string>
+    <string name="number">Number</string>
+    <string name="height">Height</string>
 </resources>
