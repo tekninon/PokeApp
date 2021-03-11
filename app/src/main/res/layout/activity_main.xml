@@ -111,6 +111,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="25dip"
                 android:layout_marginRight="25dip"
+                android:onClick="openCompass"
                 />
             <Button
                 android:id="@+id/btnPodo"
@@ -120,6 +121,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="25dip"
                 android:layout_marginRight="25dip"
+                android:onClick="openPodo"
                 />
         </LinearLayout>
 
