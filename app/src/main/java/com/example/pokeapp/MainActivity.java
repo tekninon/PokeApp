@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Request by Name
-                request = rfConfig.getPokeService().getPokemonByName(etSearch.getText().toString());
+                request = rfConfig.getPokeService().getPokemonByName(etSearch.getText().toString().toLowerCase());
 
                 request.enqueue(new Callback<Pokemon>() {
                     @Override
@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                         Pokemon pokemon = response.body();
                         tvPokemonName.setText(pokemon.getName());
                         tvPokemonId.setText(Integer.toString(pokemon.getId()));
+                        tvPokemonHeight.setText(Float.toString(pokemon.getHeight()));
                         etSearch.clearFocus();
                     }
 
