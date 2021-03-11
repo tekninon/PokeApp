@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Pokemon> call, Throwable t) {
-                        //Log.e("REQUEST ERROR", "Fail to find Pokemon. " + t.getMessage());
+                        Log.e("REQUEST ERROR", "Fail to find Pokemon. " + t.getMessage());
                         Toast.makeText(MainActivity.this, "Fail to find Pokemon.", Toast.LENGTH_LONG).show();
                         etSearch.setText("");
                     }
