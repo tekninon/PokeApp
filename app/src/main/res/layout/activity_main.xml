@@ -104,7 +104,7 @@
                 android:id="@+id/btnPodo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Podometer"
+                android:text="@string/Pedometer"
                 android:layout_weight="1"
                 android:layout_marginLeft="25dip"
                 android:layout_marginRight="25dip"
