@@ -1,6 +1,7 @@
 package com.example.pokeapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
     InputMethodManager inputManager;
 
     Call<Pokemon> request;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +113,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ShakeDetector.destroy();
+    }
+
+    public void openCompass(View view) {
+        Intent intent = new Intent(MainActivity.this, BoussoleActivity.class);
+        startActivity(intent);
+    }
+
+    public void openPodo(View view) {
+        Intent intent = new Intent(MainActivity.this, PodoActivity.class);
+        startActivity(intent);
     }
 
 }
