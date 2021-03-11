@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         rfConfig = new PokemonApi();
         inputManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
 
-        etSearch = findViewById(R.id.editText_search);
+        //etSearch = findViewById(R.id.editText_search);
         buttonSearch = findViewById(R.id.button_search);
         tvPokemonName = findViewById(R.id.tv_pokename);
         tvPokemonId = findViewById(R.id.tv_pokeid);
@@ -83,14 +83,14 @@ public class MainActivity extends AppCompatActivity {
                         // Recuperer url de l'api
                         Picasso.get().load(urlImg).into(pokemonImg);
 
-                        etSearch.clearFocus();
+                        //etSearch.clearFocus();
                     }
 
                     @Override
                     public void onFailure(Call<Pokemon> call, Throwable t) {
                         Log.e("REQUEST ERROR", "Fail to find Pokemon. " + t.getMessage());
                         Toast.makeText(MainActivity.this, "Fail to find Pokemon.", Toast.LENGTH_LONG).show();
-                        etSearch.setText("");
+                        //etSearch.setText("");
                     }
                 });
                 inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
