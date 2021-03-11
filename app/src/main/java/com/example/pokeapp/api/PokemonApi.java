@@ -18,4 +18,8 @@ public class PokemonApi {
         }
         return retrofit;
     }
+
+    public PokemonApiInterface getPokeService(){
+        return this.retrofit.create(PokemonApiInterface.class);
+    }
 }

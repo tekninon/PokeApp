@@ -11,10 +11,16 @@ import java.util.List;
 public class Pokemon {
 
 
+    public Pokemon(){}
 
-    @SerializedName("forms")
+    public Pokemon(int id, String name, float height){
+        this.id = id;
+        this.name = name;
+        this.height = height;
+    }
+    /*@SerializedName("forms")
     @Expose
-    public List<Form> forms = null;
+    public List<Form> forms = null;*/
 
     @SerializedName("id")
     @Expose
@@ -25,21 +31,32 @@ public class Pokemon {
     @Expose
     public String name;
 
-
-    @SerializedName("sprites")
+    @SerializedName("height")
     @Expose
-    public Sprites sprites;
+    public float height;
+
+    /*@SerializedName("sprites")
+    @Expose
+    public Sprites sprites;*/
 
 
 
 
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+    /*
     public List<Form> getForms() {
         return forms;
     }
 
     public void setForms(List<Form> forms) {
         this.forms = forms;
-    }
+    }*/
 
 
     public Integer getId() {
@@ -61,13 +78,13 @@ public class Pokemon {
     }
 
 
-    public Sprites getSprites() {
+    /*public Sprites getSprites() {
         return sprites;
     }
 
     public void setSprites(Sprites sprites) {
         this.sprites = sprites;
-    }
+    }*/
 
 
 }
