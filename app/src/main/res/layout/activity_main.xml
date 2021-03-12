@@ -118,11 +118,11 @@
                 android:id="@+id/btnPokedex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Pokedex"
-                android:layout_weight="1"
                 android:layout_marginLeft="25dip"
                 android:layout_marginRight="25dip"
-                />
+                android:layout_weight="1"
+                android:onClick="openPokedex"
+                android:text="@string/Pokedex" />
 
             <Button
                 android:id="@+id/btnPodo"

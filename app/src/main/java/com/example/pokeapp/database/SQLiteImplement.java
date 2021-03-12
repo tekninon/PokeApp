@@ -14,9 +14,8 @@ import com.example.pokeapp.utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLImplement {
 
-    public class SQLiteImplement extends SQLiteOpenHelper {
+ public class SQLiteImplement extends SQLiteOpenHelper {
 
         public SQLiteImplement(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
             super(context, name, factory, version);
@@ -35,7 +34,8 @@ public class SQLImplement {
                     PokemonTable.PokemonEntry._ID + " INTEGER PRIMARY KEY," +
                     PokemonTable.PokemonEntry.ID_POKE + " INTEGER, " +
                     PokemonTable.PokemonEntry.NAME + " TEXT NOT NULL, " +
-                    PokemonTable.PokemonEntry.URL_IMG + " TEXT NOT NULL, " +
+                    PokemonTable.PokemonEntry.HEIGHT + " INTEGER NOT NULL, " +
+                    PokemonTable.PokemonEntry.URL_IMG + " TEXT NOT NULL " +
                     "); ";
 
 
@@ -55,6 +55,7 @@ public class SQLImplement {
             ContentValues values = new ContentValues();
             values.put(PokemonTable.PokemonEntry.ID_POKE, pokemon.getId());
             values.put(PokemonTable.PokemonEntry.NAME, pokemon.getName());
+            values.put(PokemonTable.PokemonEntry.HEIGHT, pokemon.getHeight());
             values.put(PokemonTable.PokemonEntry.URL_IMG, StringUtils.getPokemonImageStringFromId(Integer.toString(pokemon.getId())));
             db.insert(PokemonTable.PokemonEntry.TABLE_NAME, null, values);
             db.close();
@@ -77,6 +78,7 @@ public class SQLImplement {
             String[] columns = {
                     PokemonTable.PokemonEntry.ID_POKE,
                     PokemonTable.PokemonEntry.NAME,
+                    PokemonTable.PokemonEntry.HEIGHT,
                     PokemonTable.PokemonEntry.URL_IMG,
 
             };
@@ -110,5 +112,4 @@ public class SQLImplement {
             return pokemonList;
         }
     }
-}
 

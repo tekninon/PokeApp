@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pokeapp.api.PokemonApi;
-import com.example.pokeapp.database.SQLImplement;
+import com.example.pokeapp.database.SQLiteImplement;;
 import com.example.pokeapp.models.Pokemon;
 import com.example.pokeapp.shaker.ShakeDetector;
 import com.example.pokeapp.utils.StringUtils;
@@ -22,6 +22,9 @@ import com.example.pokeapp.utils.StringUtils;
 import com.squareup.picasso.Picasso;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import retrofit2.Call;
@@ -42,8 +45,12 @@ public class MainActivity extends AppCompatActivity {
 
     Call<Pokemon> request;
 
+    List<Pokemon> pokemonList;
+    private AppCompatActivity activity = MainActivity.this;
+
+
     //db
-    private SQLImplement.SQLiteImplement db;
+    private SQLiteImplement db;
 
 
     @Override
@@ -54,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
 
         rfConfig = new PokemonApi();
         inputManager = (InputMethodManager) this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+
+
+        pokemonList = new ArrayList<>();
 
         tvPokemonName = findViewById(R.id.tv_pokename);
         tvPokemonId = findViewById(R.id.tv_pokeid);
@@ -78,25 +88,35 @@ public class MainActivity extends AppCompatActivity {
                 Random random = new Random();
                 int nb = random.nextInt(152);
                 request = rfConfig.getPokeService().getPokemonById(nb == 0 ? nb : nb+1);
+
                 request.enqueue(new Callback<Pokemon>() {
                     @Override
                     public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
                         Pokemon pokemon = response.body();
                         String urlImg = StringUtils.getPokemonImageStringFromId(Integer.toString(pokemon.getId()));
 
+                        /**
+                         * Nom pokemon
+                         */
                         String name = pokemon.getName();
                         String nomMaj = name.replaceFirst(".",(name.charAt(0)+"").toUpperCase());
                         System.out.println(nomMaj);
-                        tvPokemonName.setText(nomMaj);
 
+
+                        tvPokemonName.setText(nomMaj);
                         tvPokemonId.setText(Integer.toString(pokemon.getId()));
 
                         String taille = Float.toString(pokemon.getHeight() + 100);
                         String tailleEnCm = taille + " cm";
                         tvPokemonHeight.setText(tailleEnCm);
 
-                        // Recuperer url de l'api
+
+                        // Recuperer url image de l'api
                         Picasso.get().load(urlImg).into(pokemonImg);
+
+                       db = new SQLiteImplement(activity);
+                       db.addToPokedex(pokemon);
+
 
                     }
 
@@ -133,4 +153,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, PodoActivity.class);
         startActivity(intent);
     }
+
+    public void openPokedex(View view) {
+        Intent intent = new Intent(MainActivity.this, PokedexActivity.class);
+        startActivity(intent);
+    }
+
+
+
 }
