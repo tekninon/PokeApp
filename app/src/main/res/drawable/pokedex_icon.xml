@@ -9,5 +9,5 @@
         </shape>
     </item>
     <!-- And your drawable -->
-    <item android:drawable="@drawable/pointer.png" />
+    <item android:drawable="@drawable/pointer" />
 </ripple>
