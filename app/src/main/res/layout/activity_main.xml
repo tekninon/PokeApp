@@ -113,7 +113,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="25dip"
                 android:layout_marginRight="25dip"
-                android:onClick="openPodo"
+                android:onClick="openPokedex"
                 />
             <Button
                 android:id="@+id/btnPodo"
