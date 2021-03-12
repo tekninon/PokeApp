@@ -11,9 +11,23 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.se.omapi.Session;
+import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.pokeapp.api.PokemonApi;
+import com.example.pokeapp.database.SQLiteImplement;
+import com.example.pokeapp.models.Pokemon;
+import com.example.pokeapp.utils.StringUtils;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
+import com.squareup.picasso.Picasso;
+
+import java.util.Random;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PodoActivity extends AppCompatActivity {
 
@@ -24,10 +38,22 @@ public class PodoActivity extends AppCompatActivity {
     private Integer stepCount = 0;
     private Float maxStep = 500f;
 
+    //db
+    private SQLiteImplement db;
+
+    //api
+    PokemonApi rfConfig;
+    Call<Pokemon> request;
+    private AppCompatActivity activity = PodoActivity.this;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_podo);
+
+        rfConfig = new PokemonApi();
+
 
         textView = findViewById(R.id.step_counter);
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -50,6 +76,9 @@ public class PodoActivity extends AppCompatActivity {
                    if(MagnitudeDelta > 6) {
                        if(stepCount < maxStep) {
                            stepCount++;
+                       }
+                       else if(stepCount == 10) {
+                            addNewPokemon();
                        }
                    }
                    textView.setText(stepCount.toString());
@@ -97,5 +126,31 @@ public class PodoActivity extends AppCompatActivity {
     public void retourArriere() {
         Intent intent = new Intent(PodoActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void addNewPokemon(){
+        Random random = new Random();
+        int nb = random.nextInt(152);
+        request = rfConfig.getPokeService().getPokemonById(nb == 0 ? nb : nb+1);
+
+        request.enqueue(new Callback<Pokemon>() {
+            @Override
+            public void onResponse(Call<Pokemon> call, Response<Pokemon> response) {
+                Pokemon pokemon = response.body();
+
+                //ajout a la base de donnée le pokemon affiché
+                db = new SQLiteImplement(activity);
+                db.addToPokedex(pokemon);
+                Toast.makeText(getApplicationContext(), "Nouveau pokémon ajouté au pokédex!" + pokemon.getName(), Toast.LENGTH_SHORT).show();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<Pokemon> call, Throwable t) {
+                Log.e("REQUEST ERROR", "Fail to find Pokemon. " + t.getMessage());
+                Toast.makeText(PodoActivity.this, "Fail to find Pokemon.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
