@@ -38,38 +38,43 @@
             android:id="@+id/tv_label_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0"
             android:padding="4dp"
-            android:textColor="@android:color/black"
             android:text="Name"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_pokename"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:padding="4dp" />
+            android:layout_weight="0"
+            android:padding="4dp"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/tv_label_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0"
             android:padding="4dp"
-            android:textColor="@android:color/black"
             android:text="@string/number"
+            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_pokeid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:padding="4dp" />
+            android:layout_weight="0"
+            android:padding="4dp"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:id="@+id/tv_label_height"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0"
             android:padding="4dp"
             android:text="@string/height"
             android:textColor="@android:color/black"
@@ -79,32 +84,36 @@
             android:id="@+id/tv_pokeheight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:padding="4dp" />
+            android:layout_weight="0"
+            android:padding="4dp"
+            android:textColor="@android:color/black" />
 
         <ImageView
             android:id="@+id/imagePokemon"
-            android:layout_marginTop="100dp"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="110dp"
-            >
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/btnCompass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Compass"
-                android:layout_weight="1"
                 android:layout_marginLeft="25dip"
                 android:layout_marginRight="25dip"
+                android:layout_weight="1"
                 android:onClick="openCompass"
-                />
+                android:text="@string/Compass" />
+
             <Button
                 android:id="@+id/btnPokedex"
                 android:layout_width="wrap_content"
@@ -114,16 +123,16 @@
                 android:layout_marginLeft="25dip"
                 android:layout_marginRight="25dip"
                 />
+
             <Button
                 android:id="@+id/btnPodo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Pedometer"
-                android:layout_weight="1"
                 android:layout_marginLeft="25dip"
                 android:layout_marginRight="25dip"
+                android:layout_weight="1"
                 android:onClick="openPodo"
-                />
+                android:text="@string/Pedometer" />
         </LinearLayout>
 
     </LinearLayout>
