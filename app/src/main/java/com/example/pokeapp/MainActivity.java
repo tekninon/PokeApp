@@ -3,7 +3,6 @@ package com.example.pokeapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
@@ -15,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pokeapp.api.PokemonApi;
+import com.example.pokeapp.database.SQLImplement;
 import com.example.pokeapp.models.Pokemon;
 import com.example.pokeapp.shaker.ShakeDetector;
 import com.example.pokeapp.utils.StringUtils;
@@ -41,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
     InputMethodManager inputManager;
 
     Call<Pokemon> request;
+
+    //db
+    private SQLImplement.SQLiteImplement db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
