@@ -18,6 +18,9 @@
             android:name=".PodoActivity"
             android:label="@string/Podomètre"/>
         <activity
+            android:name=".PokedexActivity"
+            android:label="@string/Pokedex"/>
+        <activity
             android:name=".BoussoleActivity"
             android:label="@string/Boussole"/>
         <activity
