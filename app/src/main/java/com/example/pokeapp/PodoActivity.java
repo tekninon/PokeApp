@@ -77,7 +77,7 @@ public class PodoActivity extends AppCompatActivity {
                        if(stepCount < maxStep) {
                            stepCount++;
                        }
-                       else if(stepCount == 10) {
+                       else {
                             addNewPokemon();
                        }
                    }
