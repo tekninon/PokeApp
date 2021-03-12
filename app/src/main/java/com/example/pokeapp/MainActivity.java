@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
                         // Recuperer url image de l'api
                         Picasso.get().load(urlImg).into(pokemonImg);
 
+                        //ajout a la base de donnée le pokemon affiché
                        db = new SQLiteImplement(activity);
                        db.addToPokedex(pokemon);
 

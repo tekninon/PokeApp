@@ -16,16 +16,17 @@ import com.example.pokeapp.utils.StringUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHolder> {
 
-    private ArrayList<Pokemon> dataset;
+    private List<Pokemon> dataset;
     private Context context;
 
-    public PokemonAdapter(Context context) {
+    public PokemonAdapter(Context context, List<Pokemon> dataset) {
         this.context = context;
-        dataset = new ArrayList<>();
+        this.dataset = dataset;
     }
 
     @Override
