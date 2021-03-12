@@ -79,6 +79,7 @@ public class PodoActivity extends AppCompatActivity {
                        }
                        else {
                             addNewPokemon();
+                            stepCount = 0;
                        }
                    }
                    textView.setText(stepCount.toString());
